@@ -822,10 +822,10 @@ export default function App() {
                                             }}
                                             placeholder="Contoh: Arya Guardian"
                                             className={`w-full bg-slate-900 border rounded-lg pl-8 pr-3 py-2 text-xs sm:text-sm text-cyan-200 focus:outline-none focus:ring-1 transition ${nameCheckStatus === 'taken'
-                                                    ? 'border-red-500 focus:border-red-400 focus:ring-red-400'
-                                                    : nameCheckStatus === 'available'
-                                                        ? 'border-emerald-500 focus:border-emerald-400 focus:ring-emerald-400'
-                                                        : 'border-slate-700 focus:border-cyan-400 focus:ring-cyan-400'
+                                                ? 'border-red-500 focus:border-red-400 focus:ring-red-400'
+                                                : nameCheckStatus === 'available'
+                                                    ? 'border-emerald-500 focus:border-emerald-400 focus:ring-emerald-400'
+                                                    : 'border-slate-700 focus:border-cyan-400 focus:ring-cyan-400'
                                                 }`}
                                         />
                                     </div>
@@ -891,8 +891,8 @@ export default function App() {
                                 }}
                                 disabled={!agentName.trim() || nameCheckStatus === 'taken' || nameCheckStatus === 'checking'}
                                 className={`flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transform active:scale-[0.99] transition duration-200 text-xs sm:text-sm ${(!agentName.trim() || nameCheckStatus === 'taken' || nameCheckStatus === 'checking')
-                                        ? 'opacity-40 cursor-not-allowed'
-                                        : ''
+                                    ? 'opacity-40 cursor-not-allowed'
+                                    : ''
                                     }`}
                             >
                                 <span>MULAI MISI SEKARANG</span>
@@ -963,22 +963,22 @@ export default function App() {
                             <div
                                 onClick={() => handleZoneClick('zone1', PAGES.PAGE_3_ZONA_1, 'Zona 1: Phishing Zone')}
                                 className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone1
-                                        ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                                        : unlockedZones.zone1
-                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                            : 'bg-slate-950/80 border-slate-800 opacity-60'
+                                    ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
+                                    : unlockedZones.zone1
+                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                        : 'bg-slate-950/80 border-slate-800 opacity-60'
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
                                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone1
-                                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                                            : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                                        : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
                                         }`}>
                                         <i className={completedZones.zone1 ? "fa-solid fa-circle-check" : "fa-solid fa-envelope-open-text"}></i>
                                     </div>
                                     <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone1
-                                            ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
-                                            : 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                        ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
+                                        : 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
                                         }`}>
                                         {completedZones.zone1 ? 'STATUS: COMPLETED ✓' : 'STATUS: UNLOCKED'}
                                     </span>
@@ -1014,26 +1014,26 @@ export default function App() {
                             <div
                                 onClick={() => handleZoneClick('zone2', PAGES.PAGE_6_ZONA_2, 'Zona 2: Password Vault')}
                                 className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone2
-                                        ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                                        : unlockedZones.zone2
-                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                            : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
+                                    ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
+                                    : unlockedZones.zone2
+                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                        : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
                                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone2
-                                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                                            : unlockedZones.zone2
-                                                ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                                : 'bg-slate-800/50 border border-slate-700 text-slate-500'
+                                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                                        : unlockedZones.zone2
+                                            ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                            : 'bg-slate-800/50 border border-slate-700 text-slate-500'
                                         }`}>
                                         <i className={completedZones.zone2 ? "fa-solid fa-circle-check" : unlockedZones.zone2 ? "fa-solid fa-lock-open" : "fa-solid fa-lock"}></i>
                                     </div>
                                     <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone2
-                                            ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
-                                            : unlockedZones.zone2
-                                                ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                                : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
+                                        ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
+                                        : unlockedZones.zone2
+                                            ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                            : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
                                         }`}>
                                         {completedZones.zone2 ? 'STATUS: COMPLETED ✓' : unlockedZones.zone2 ? 'STATUS: UNLOCKED' : 'STATUS: LOCKED 🔒'}
                                     </span>
@@ -1069,26 +1069,26 @@ export default function App() {
                             <div
                                 onClick={() => handleZoneClick('zone3', PAGES.PAGE_8_ZONA_3, 'Zona 3: Social Privacy')}
                                 className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone3
-                                        ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                                        : unlockedZones.zone3
-                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                            : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
+                                    ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
+                                    : unlockedZones.zone3
+                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                        : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
                                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone3
-                                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                                            : unlockedZones.zone3
-                                                ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                                : 'bg-slate-800/50 border border-slate-700 text-slate-500'
+                                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                                        : unlockedZones.zone3
+                                            ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                            : 'bg-slate-800/50 border border-slate-700 text-slate-500'
                                         }`}>
                                         <i className={completedZones.zone3 ? "fa-solid fa-circle-check" : unlockedZones.zone3 ? "fa-solid fa-id-card" : "fa-solid fa-lock"}></i>
                                     </div>
                                     <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone3
-                                            ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
-                                            : unlockedZones.zone3
-                                                ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                                : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
+                                        ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
+                                        : unlockedZones.zone3
+                                            ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                            : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
                                         }`}>
                                         {completedZones.zone3 ? 'STATUS: COMPLETED ✓' : unlockedZones.zone3 ? 'STATUS: UNLOCKED' : 'STATUS: LOCKED 🔒'}
                                     </span>
@@ -1124,26 +1124,26 @@ export default function App() {
                             <div
                                 onClick={() => handleZoneClick('zone4', PAGES.PAGE_10_ZONA_4, 'Zona 4: Hoax Lab')}
                                 className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone4
-                                        ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
-                                        : unlockedZones.zone4
-                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                            : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
+                                    ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
+                                    : unlockedZones.zone4
+                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                        : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
                                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone4
-                                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                                            : unlockedZones.zone4
-                                                ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                                : 'bg-slate-800/50 border border-slate-700 text-slate-500'
+                                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                                        : unlockedZones.zone4
+                                            ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                            : 'bg-slate-800/50 border border-slate-700 text-slate-500'
                                         }`}>
                                         <i className={completedZones.zone4 ? "fa-solid fa-circle-check" : unlockedZones.zone4 ? "fa-solid fa-flask-vial" : "fa-solid fa-lock"}></i>
                                     </div>
                                     <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone4
-                                            ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
-                                            : unlockedZones.zone4
-                                                ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                                : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
+                                        ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
+                                        : unlockedZones.zone4
+                                            ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                            : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
                                         }`}>
                                         {completedZones.zone4 ? 'STATUS: COMPLETED ✓' : unlockedZones.zone4 ? 'STATUS: UNLOCKED' : 'STATUS: LOCKED 🔒'}
                                     </span>
@@ -1252,14 +1252,14 @@ export default function App() {
                                         }
                                     }}
                                     className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-center justify-between ${option.isCorrect
-                                            ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
-                                            : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
+                                        ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
+                                        : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
                                         }`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center ${idx === 0
-                                                ? 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
-                                                : 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
+                                            ? 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
+                                            : 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
                                             }`}>
                                             {idx === 0 ? 'A' : 'B'}
                                         </span>
@@ -1493,14 +1493,14 @@ export default function App() {
                                                 }
                                             }}
                                             className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-center justify-between ${option.isCorrect
-                                                    ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
-                                                    : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
+                                                ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
+                                                : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
                                                 }`}
                                         >
                                             <div className="flex items-center gap-3">
                                                 <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center font-mono ${idx === 0
-                                                        ? 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
-                                                        : 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
+                                                    ? 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
+                                                    : 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
                                                     }`}>
                                                     {idx === 0 ? 'A' : 'B'}
                                                 </span>
@@ -1666,13 +1666,13 @@ export default function App() {
                                                 }
                                             }}
                                             className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-start gap-3 ${option.isCorrect
-                                                    ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
-                                                    : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
+                                                ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
+                                                : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
                                                 }`}
                                         >
                                             <span className={`w-7 h-7 shrink-0 rounded-lg text-xs font-bold flex items-center justify-center ${idx === 0
-                                                    ? 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
-                                                    : 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
+                                                ? 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
+                                                : 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
                                                 }`}>
                                                 {idx === 0 ? 'A' : 'B'}
                                             </span>
@@ -1827,13 +1827,13 @@ export default function App() {
                                                 }
                                             }}
                                             className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-start gap-3 ${option.isCorrect
-                                                    ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
-                                                    : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
+                                                ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
+                                                : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
                                                 }`}
                                         >
                                             <span className={`w-7 h-7 shrink-0 rounded-lg text-xs font-bold flex items-center justify-center ${idx === 0
-                                                    ? 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
-                                                    : 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
+                                                ? 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
+                                                : 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
                                                 }`}>
                                                 {idx === 0 ? 'A' : 'B'}
                                             </span>
@@ -2096,23 +2096,23 @@ export default function App() {
                                     <div
                                         key={idx}
                                         className={`p-3 rounded-xl border flex items-center justify-between transition ${idx === 0
-                                                ? 'bg-amber-950/30 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
-                                                : idx === 1
-                                                    ? 'bg-slate-800/80 border-slate-400/40'
-                                                    : idx === 2
-                                                        ? 'bg-amber-950/20 border-amber-700/40'
-                                                        : 'bg-slate-950/60 border-slate-800'
+                                            ? 'bg-amber-950/30 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
+                                            : idx === 1
+                                                ? 'bg-slate-800/80 border-slate-400/40'
+                                                : idx === 2
+                                                    ? 'bg-amber-950/20 border-amber-700/40'
+                                                    : 'bg-slate-950/60 border-slate-800'
                                             }`}
                                     >
                                         <div className="flex items-center gap-3">
                                             {/* Badge Rank */}
                                             <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs ${idx === 0
-                                                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30'
-                                                    : idx === 1
-                                                        ? 'bg-slate-300 text-slate-950'
-                                                        : idx === 2
-                                                            ? 'bg-amber-700 text-amber-100'
-                                                            : 'bg-slate-800 text-slate-400 font-mono'
+                                                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30'
+                                                : idx === 1
+                                                    ? 'bg-slate-300 text-slate-950'
+                                                    : idx === 2
+                                                        ? 'bg-amber-700 text-amber-100'
+                                                        : 'bg-slate-800 text-slate-400 font-mono'
                                                 }`}>
                                                 {idx === 0 ? <i className="fa-solid fa-crown text-slate-950"></i> : `#${idx + 1}`}
                                             </div>
@@ -2200,7 +2200,7 @@ export default function App() {
                                         setAdminPinError('');
                                     }}
                                     onKeyDown={(e) => e.key === 'Enter' && handleVerifyAdminPin()}
-                                    placeholder="PIN (Default: guru2026)"
+                                    placeholder="PIN"
                                     className="w-56 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-center text-sm text-cyan-200 focus:outline-none focus:border-cyan-400 mb-2"
                                     autoFocus
                                 />
@@ -2414,10 +2414,10 @@ function ZoneTimerBar({ timeLeft, timeLimit }) {
             <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
                 <div
                     className={`h-full transition-all duration-1000 rounded-full ${timeLeft <= 10
-                            ? 'bg-gradient-to-r from-red-500 to-rose-600'
-                            : timeLeft <= 20
-                                ? 'bg-gradient-to-r from-amber-400 to-yellow-500'
-                                : 'bg-gradient-to-r from-cyan-400 to-emerald-400'
+                        ? 'bg-gradient-to-r from-red-500 to-rose-600'
+                        : timeLeft <= 20
+                            ? 'bg-gradient-to-r from-amber-400 to-yellow-500'
+                            : 'bg-gradient-to-r from-cyan-400 to-emerald-400'
                         }`}
                     style={{ width: `${percentage}%` }}
                 ></div>
