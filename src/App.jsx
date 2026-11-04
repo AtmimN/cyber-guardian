@@ -313,6 +313,12 @@ export default function App() {
     const [leaderboardList, setLeaderboardList] = useState([]);
     const [leaderboardLoading, setLeaderboardLoading] = useState(false);
 
+    // --- LEADERBOARD ADMIN / PENGELOLA STATE ---
+    const [isAdminMode, setIsAdminMode] = useState(false);
+    const [adminPinInput, setAdminPinInput] = useState('');
+    const [showAdminPinPrompt, setShowAdminPinPrompt] = useState(false);
+    const [adminPinError, setAdminPinError] = useState('');
+
     // --- ZONA STATUS & KELENGKAPAN (COMPLETED ZONES) ---
     const [unlockedZones, setUnlockedZones] = useState({
         zone1: true,   // Default Unlocked
@@ -466,6 +472,54 @@ export default function App() {
     const openLeaderboard = () => {
         fetchLeaderboard();
         setShowLeaderboard(true);
+    };
+
+    const handleVerifyAdminPin = () => {
+        if (adminPinInput.trim() === 'guru2026') {
+            setIsAdminMode(true);
+            setShowAdminPinPrompt(false);
+            setAdminPinError('');
+        } else {
+            setAdminPinError('PIN Pengajar salah! (Default: guru2026)');
+        }
+    };
+
+    const handleDeleteLeaderboardEntry = async (entry) => {
+        if (!window.confirm(`Hapus agen "${entry.username}" dari daftar Leaderboard?`)) return;
+        try {
+            const res = await fetch(`/api/leaderboard/${encodeURIComponent(entry.id || entry.username)}?pin=${encodeURIComponent(adminPinInput || 'guru2026')}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin: adminPinInput || 'guru2026' })
+            });
+            const data = await res.json();
+            if (data.success) {
+                fetchLeaderboard();
+            } else {
+                alert(data.error || 'Gagal menghapus data.');
+            }
+        } catch {
+            alert('Terjadi kesalahan saat menghapus data.');
+        }
+    };
+
+    const handleResetAllLeaderboard = async () => {
+        if (!window.confirm('PERINGATAN: Apakah Anda yakin ingin MENGHAPUS SEMUA data leaderboard? Tindakan ini tidak dapat dibatalkan.')) return;
+        try {
+            const res = await fetch('/api/leaderboard/reset', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pin: adminPinInput || 'guru2026' })
+            });
+            const data = await res.json();
+            if (data.success) {
+                fetchLeaderboard();
+            } else {
+                alert(data.error || 'Gagal mereset leaderboard.');
+            }
+        } catch {
+            alert('Terjadi kesalahan saat mereset data.');
+        }
     };
 
     const submitScoreToLeaderboard = async (finalScore, finalTime) => {
@@ -1999,6 +2053,31 @@ export default function App() {
                             <p className="text-xs text-slate-400">
                                 Agen tercepat dan tertangguh mempertahankan sistem sekolah.
                             </p>
+
+                            {/* Banner Mode Pengajar Jika Aktif */}
+                            {isAdminMode && (
+                                <div className="mt-3 px-3 py-2 bg-red-950/40 border border-red-500/50 rounded-lg flex items-center justify-between text-xs animate-fadeIn">
+                                    <span className="text-red-300 font-bold flex items-center gap-1.5">
+                                        <i className="fa-solid fa-user-gear text-red-400"></i>
+                                        <span>Mode Guru Aktif (Akses Hapus)</span>
+                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={handleResetAllLeaderboard}
+                                            className="text-[11px] bg-red-800 hover:bg-red-700 text-white px-2.5 py-1 rounded transition font-bold"
+                                            title="Kosongkan Semua Data"
+                                        >
+                                            Reset Semua
+                                        </button>
+                                        <button
+                                            onClick={() => setIsAdminMode(false)}
+                                            className="text-[11px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded transition"
+                                        >
+                                            Keluar
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* List Leaderboard */}
@@ -2049,14 +2128,27 @@ export default function App() {
                                             </div>
                                         </div>
 
-                                        <div className="text-right">
-                                            <p className="font-mono font-black text-amber-300 text-xs sm:text-sm">
-                                                {entry.totalScore.toLocaleString()} PTS
-                                            </p>
-                                            <p className="text-[10px] text-slate-400 font-mono">
-                                                <i className="fa-regular fa-clock mr-1"></i>
-                                                {entry.timeTakenSeconds}s
-                                            </p>
+                                        <div className="flex items-center gap-3">
+                                            <div className="text-right">
+                                                <p className="font-mono font-black text-amber-300 text-xs sm:text-sm">
+                                                    {entry.totalScore.toLocaleString()} PTS
+                                                </p>
+                                                <p className="text-[10px] text-slate-400 font-mono">
+                                                    <i className="fa-regular fa-clock mr-1"></i>
+                                                    {entry.timeTakenSeconds}s
+                                                </p>
+                                            </div>
+
+                                            {/* Tombol Hapus Satuan Khusus Mode Pengajar */}
+                                            {isAdminMode && (
+                                                <button
+                                                    onClick={() => handleDeleteLeaderboardEntry(entry)}
+                                                    className="w-7 h-7 rounded-lg bg-red-500/20 hover:bg-red-500/40 border border-red-500/40 text-red-400 hover:text-red-300 flex items-center justify-center transition text-xs shrink-0 cursor-pointer"
+                                                    title={`Hapus agen ${entry.username}`}
+                                                >
+                                                    <i className="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 ))
@@ -2065,13 +2157,72 @@ export default function App() {
 
                         <div className="pt-3 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400">
                             <span>Sistem Poin: Base 1000 + (Sisa Detik × 30)</span>
-                            <button
-                                onClick={fetchLeaderboard}
-                                className="text-cyan-400 hover:underline flex items-center gap-1"
-                            >
-                                <i className="fa-solid fa-rotate text-[10px]"></i> Refresh
-                            </button>
+                            <div className="flex items-center gap-3">
+                                <button
+                                    onClick={fetchLeaderboard}
+                                    className="text-cyan-400 hover:underline flex items-center gap-1"
+                                >
+                                    <i className="fa-solid fa-rotate text-[10px]"></i> Refresh
+                                </button>
+
+                                {!isAdminMode && (
+                                    <button
+                                        onClick={() => {
+                                            setShowAdminPinPrompt(true);
+                                            setAdminPinInput('');
+                                            setAdminPinError('');
+                                        }}
+                                        className="text-slate-400 hover:text-amber-400 transition flex items-center gap-1 text-[11px] cursor-pointer"
+                                        title="Kelola data sebagai Pengajar"
+                                    >
+                                        <i className="fa-solid fa-lock text-[10px]"></i>
+                                        <span>Guru</span>
+                                    </button>
+                                )}
+                            </div>
                         </div>
+
+                        {/* Prompt Input PIN Guru / Pengajar */}
+                        {showAdminPinPrompt && (
+                            <div className="absolute inset-0 bg-slate-950/95 backdrop-blur-md rounded-2xl p-6 flex flex-col items-center justify-center z-20 text-center animate-fadeIn">
+                                <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center text-xl mb-3">
+                                    <i className="fa-solid fa-key"></i>
+                                </div>
+                                <h4 className="text-base font-bold text-white mb-1">Akses Pengajar / Guru</h4>
+                                <p className="text-xs text-slate-400 max-w-xs mb-4">
+                                    Masukkan PIN Pengajar untuk mengelola & menghapus data peringkat:
+                                </p>
+                                <input
+                                    type="password"
+                                    value={adminPinInput}
+                                    onChange={(e) => {
+                                        setAdminPinInput(e.target.value);
+                                        setAdminPinError('');
+                                    }}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleVerifyAdminPin()}
+                                    placeholder="PIN (Default: guru2026)"
+                                    className="w-56 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-center text-sm text-cyan-200 focus:outline-none focus:border-cyan-400 mb-2"
+                                    autoFocus
+                                />
+                                {adminPinError && (
+                                    <p className="text-xs text-red-400 mb-3">{adminPinError}</p>
+                                )}
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => setShowAdminPinPrompt(false)}
+                                        className="px-4 py-1.5 bg-slate-800 text-slate-300 rounded-lg text-xs hover:bg-slate-700 transition"
+                                    >
+                                        Batal
+                                    </button>
+                                    <button
+                                        onClick={handleVerifyAdminPin}
+                                        className="px-4 py-1.5 bg-amber-500 text-slate-950 font-bold rounded-lg text-xs hover:bg-amber-400 transition"
+                                    >
+                                        Masuk Mode Guru
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             )}

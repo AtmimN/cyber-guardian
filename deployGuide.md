@@ -134,12 +134,35 @@ File konfigurasi `vercel.json` sudah tersedia di dalam proyek sehingga siap dide
 ---
 
 ## 🔄 Pembaruan di Masa Depan (Update Code)
-Jika di kemudian hari Anda melakukan perubahan kode di lokal dan ingin memperbarui aplikasi live:
+Jika di kemudian hari Anda melakukan perubahan kode di lokal dan ingin memperbarui aplikasi live di Vercel:
 
 ```powershell
 git add .
-git commit -m "update: perbaikan fitur"
+git commit -m "feat: tambah mode pengajar hapus data leaderboard"
 git push
 ```
-Render atau Vercel akan otomatis mendeteksi push baru dan melakukan deploy ulang secara otomatis (*Auto-deploy*).
+Vercel akan otomatis mendeteksi push baru dan melakukan deploy ulang dalam waktu sekitar 1 menit (*Auto-deploy*).
+
+---
+
+## 📊 Bagian 4: Cara Memantau & Menghapus Data Leaderboard
+
+Karena di Vercel kita tidak memiliki akses langsung ke server/folder file, sistem telah dilengkapi dengan **Mode Pengajar (Admin Mode)** langsung dari antarmuka web:
+
+### 1. Cara Memantau Peringkat Siswa
+- Buka website yang telah dideploy di Vercel.
+- Klik tombol **Leaderboard** (ikon piala 🏆) di pojok kanan atas navbar atau di halaman utama.
+- Anda dapat melihat peringkat nilai, sisa waktu, sekolah, dan lencana karakter setiap siswa secara langsung dan realtime.
+- Anda juga dapat melihat raw data JSON lewat browser di: `https://domain-vercel-anda.vercel.app/api/leaderboard`.
+
+### 2. Cara Menghapus Data Siswa (Nama Iseng / Duplikat)
+1. Buka modal **Leaderboard**.
+2. Di pojok kanan bawah modal (di sebelah tombol *Refresh*), klik tombol gembok bertuliskan **"🔒 Guru"**.
+3. Masukkan **PIN Pengajar**:
+   - PIN Default: `guru2026`
+4. Setelah masuk, banner merah bertuliskan **"Mode Guru Aktif"** akan muncul:
+   - **Hapus Satu Siswa**: Klik ikon tempat sampah merah (**🗑️**) di baris nama siswa yang ingin dihapus.
+   - **Reset Semua Data**: Klik tombol **"Reset Semua"** jika ingin mengosongkan seluruh papan peringkat untuk memulai kelas/sesi ujian baru.
+   - Klik **"Keluar"** untuk kembali ke tampilan siswa biasa.
+
 

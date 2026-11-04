@@ -136,4 +136,65 @@ app.post('/api/leaderboard/submit', (req, res) => {
     }
 });
 
+// -------------------------------------------------------------
+// LEADERBOARD: HAPUS SATU DATA (KHUSUS PENGAJAR/GURU)
+// -------------------------------------------------------------
+app.delete('/api/leaderboard/:id', (req, res) => {
+    try {
+        const { pin } = req.body || {};
+        const queryPin = req.query.pin;
+        const effectivePin = pin || queryPin;
+        const ADMIN_PIN = process.env.ADMIN_PIN || 'guru2026';
+
+        if (effectivePin !== ADMIN_PIN) {
+            return res.status(403).json({ error: 'PIN Pengajar tidak valid!' });
+        }
+
+        const { id } = req.params;
+        const db = readDb();
+        const initialLength = (db.leaderboard || []).length;
+
+        db.leaderboard = (db.leaderboard || []).filter(
+            e => e.id !== id && e.username.toLowerCase() !== id.toLowerCase()
+        );
+
+        writeDb(db);
+
+        res.json({
+            success: true,
+            message: `Data agen berhasil dihapus dari leaderboard.`,
+            removed: initialLength - db.leaderboard.length
+        });
+    } catch (err) {
+        console.error('Delete leaderboard entry error:', err);
+        res.status(500).json({ error: 'Gagal menghapus data dari leaderboard.' });
+    }
+});
+
+// -------------------------------------------------------------
+// LEADERBOARD: RESET SEMUA DATA (KHUSUS PENGAJAR/GURU)
+// -------------------------------------------------------------
+app.post('/api/leaderboard/reset', (req, res) => {
+    try {
+        const { pin } = req.body || {};
+        const ADMIN_PIN = process.env.ADMIN_PIN || 'guru2026';
+
+        if (pin !== ADMIN_PIN) {
+            return res.status(403).json({ error: 'PIN Pengajar tidak valid!' });
+        }
+
+        const db = readDb();
+        db.leaderboard = [];
+        writeDb(db);
+
+        res.json({
+            success: true,
+            message: 'Seluruh data leaderboard berhasil dikosongkan/direset!'
+        });
+    } catch (err) {
+        console.error('Reset leaderboard error:', err);
+        res.status(500).json({ error: 'Gagal mereset data leaderboard.' });
+    }
+});
+
 export default app;
