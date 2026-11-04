@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Custom Theme Configuration */
+@theme {
+    --color-office-50: #f0f9ff;
+    --color-office-100: #e0f2fe;
+    --color-office-200: #bae6fd;
+    --color-office-300: #7dd3fc;
+    --color-office-400: #38bdf8;
+    --color-office-500: #0ea5e9;
+    --color-office-600: #0284c7;
+    --color-office-700: #0369a1;
+    --color-office-800: #075985;
+    --color-office-900: #0c4a6e;
+    --color-office-950: #082f49;
+}
+
+/* Custom Styles */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.glass-panel {
+    background: rgba(8, 47, 73, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #0284c7;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #38bdf8;
+}

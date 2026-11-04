@@ -1,0 +1,11 @@
+node_modules
+dist
+.git
+.gitignore
+.firebaserc
+firebase.json
+README.md
+debug.md
+newpool.md
+guidebook.md
+mobile.md
