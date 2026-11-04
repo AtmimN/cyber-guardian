@@ -640,37 +640,36 @@ export default function App() {
     const currentCaseZ4 = ZONE_CASES.zone4[selectedCases.zone4];
 
     return (
-        <div className="min-h-screen text-slate-100 flex flex-col font-sans select-none bg-slate-950">
+        <div className="min-h-screen text-slate-100 flex flex-col font-sans select-none bg-slate-950 w-full overflow-x-hidden">
             {/* Top Navigation Bar */}
-            <header className="border-b border-cyan-900/60 bg-slate-900/85 backdrop-blur-md sticky top-0 z-40 px-4 py-3 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-cyan-600/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400 font-bold shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                        <i className="fa-solid fa-shield-halved text-xl"></i>
+            <header className="border-b border-cyan-900/60 bg-slate-900/90 backdrop-blur-md sticky top-0 z-40 px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between w-full">
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-cyan-600/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400 font-bold shadow-[0_0_15px_rgba(6,182,212,0.3)] shrink-0">
+                        <i className="fa-solid fa-shield-halved text-base sm:text-xl"></i>
                     </div>
                     <div>
-                        <h1 className="text-sm md:text-base font-bold tracking-wider text-cyan-300 uppercase">
+                        <h1 className="text-xs sm:text-sm md:text-base font-bold tracking-wider text-cyan-300 uppercase leading-none sm:leading-tight">
                             CyberShield Mission
                         </h1>
-                        <p className="text-[11px] text-slate-400">Pendidikan Berkarakter: Gen-Z Cyber Guardian</p>
+                        <p className="text-[10px] sm:text-[11px] text-slate-400 hidden sm:block">Pendidikan Berkarakter: Gen-Z Cyber Guardian</p>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
                     {/* Skor Realtime */}
-                    <div className="bg-slate-900/90 border border-cyan-500/30 px-3 py-1.5 rounded-lg flex items-center gap-2 text-xs">
-                        <i className="fa-solid fa-coins text-amber-400"></i>
-                        <span className="font-mono font-bold text-amber-300">{totalScore.toLocaleString()}</span>
-                        <span className="text-[10px] text-slate-400 hidden sm:inline">PTS</span>
+                    <div className="bg-slate-900/90 border border-cyan-500/30 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg flex items-center gap-1.5 text-xs">
+                        <i className="fa-solid fa-coins text-amber-400 text-[11px] sm:text-xs"></i>
+                        <span className="font-mono font-bold text-amber-300 text-[11px] sm:text-xs">{totalScore.toLocaleString()}</span>
+                        <span className="text-[10px] text-slate-400 hidden md:inline">PTS</span>
                     </div>
 
                     {/* Indikator Perisai Integritas / Nyawa */}
-                    <div className="bg-slate-900/90 border border-slate-800 px-2.5 py-1.5 rounded-lg flex items-center gap-1.5 text-xs" title="Integritas Perisai Keamanan">
+                    <div className="bg-slate-900/90 border border-slate-800 px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg flex items-center gap-1 text-xs" title="Integritas Perisai Keamanan">
                         {[1, 2, 3].map((heart) => (
                             <i
                                 key={heart}
-                                className={`fa-solid fa-shield text-xs transition-colors duration-300 ${
-                                    heart <= shieldHp ? 'text-cyan-400 drop-shadow-[0_0_6px_rgba(6,182,212,0.6)]' : 'text-slate-700'
-                                }`}
+                                className={`fa-solid fa-shield text-[10px] sm:text-xs transition-colors duration-300 ${heart <= shieldHp ? 'text-cyan-400 drop-shadow-[0_0_6px_rgba(6,182,212,0.6)]' : 'text-slate-700'
+                                    }`}
                             ></i>
                         ))}
                     </div>
@@ -678,80 +677,81 @@ export default function App() {
                     {/* Tombol Leaderboard */}
                     <button
                         onClick={openLeaderboard}
-                        className="text-xs bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/40 px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shadow hover:shadow-amber-500/20"
+                        className="text-xs bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/40 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg flex items-center gap-1 transition shadow hover:shadow-amber-500/20"
                         title="Papan Peringkat"
                     >
-                        <i className="fa-solid fa-trophy text-amber-400"></i>
-                        <span className="hidden md:inline font-semibold">Peringkat</span>
+                        <i className="fa-solid fa-trophy text-amber-400 text-xs"></i>
+                        <span className="hidden md:inline font-semibold text-xs">Peringkat</span>
                     </button>
 
                     {/* Navigasi Peta Misi */}
                     {currentPage !== PAGES.PAGE_1_COVER && (
                         <button
                             onClick={() => setCurrentPage(PAGES.PAGE_2_HUB)}
-                            className="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 px-2.5 sm:px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shadow hover:shadow-cyan-500/20"
+                            className="text-xs bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg flex items-center gap-1 transition shadow hover:shadow-cyan-500/20"
                             title="Kembali ke Peta Misi"
                         >
-                            <i className="fa-solid fa-map-location-dot"></i>
-                            <span className="hidden sm:inline">Peta</span>
+                            <i className="fa-solid fa-map-location-dot text-xs"></i>
+                            <span className="hidden sm:inline text-xs">Peta</span>
                         </button>
                     )}
 
-                    {/* Status Identitas Agen */}
-                    <div className="bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 text-slate-300">
+                    {/* Status Identitas Agen (Disembunyikan di layar mobile kecil agar navbar tidak meluap ke kanan) */}
+                    <div className="hidden sm:flex bg-slate-900 border border-slate-800 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs items-center gap-1.5 text-slate-300">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span className="font-mono text-cyan-400 font-semibold">{agentName || 'Agent'}</span>
+                        <span className="font-mono text-cyan-400 font-semibold max-w-[80px] truncate">{agentName || 'Agent'}</span>
                     </div>
 
                     {/* Tombol Pintas Kembali ke Sertifikat jika Seluruh Zona Selesai */}
                     {allZonesCompleted && currentPage !== PAGES.PAGE_11_VICTORY && (
                         <button
                             onClick={() => setCurrentPage(PAGES.PAGE_11_VICTORY)}
-                            className="text-xs bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shadow shadow-amber-500/20 animate-pulse"
+                            className="text-xs bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg flex items-center gap-1 transition shadow shadow-amber-500/20 animate-pulse"
                             title="Buka Kembali Sertifikat Guardian"
                         >
-                            <i className="fa-solid fa-award"></i>
-                            <span className="hidden sm:inline">Sertifikat</span>
+                            <i className="fa-solid fa-award text-xs"></i>
+                            <span className="hidden sm:inline text-xs">Sertifikat</span>
                         </button>
                     )}
                 </div>
             </header>
 
             {/* Main Content Area */}
-            <main className="flex-1 flex flex-col items-center justify-center p-4 max-w-4xl w-full mx-auto">
+            <main className="flex-1 flex flex-col items-center justify-center px-3.5 py-4 sm:p-6 max-w-4xl w-full mx-auto">
 
                 {/* ========================================================
                     HALAMAN 1: COVER & PRE-TEST
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_1_COVER && (
-                    <div className="w-full max-w-2xl bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden animate-fadeIn">
+                    <div className="w-full max-w-2xl bg-slate-900/90 border border-cyan-500/30 rounded-2xl p-4 sm:p-7 shadow-2xl backdrop-blur-xl relative overflow-hidden animate-fadeIn">
                         <div className="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
                         <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                        <div className="text-center mb-6">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-semibold uppercase tracking-wider mb-3 animate-pulse">
+                        <div className="text-center mb-4 sm:mb-6">
+                            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2.5 sm:mb-3 animate-pulse">
                                 <i className="fa-solid fa-triangle-exclamation"></i> Darurat Keamanan Siber Sekolah
                             </div>
-                            <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 mb-2">
+                            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400 mb-1.5 sm:mb-2 leading-snug">
                                 CyberShield Mission: Gen-Z Cyber Guardian
                             </h2>
-                            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg mx-auto">
+                            <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-lg mx-auto">
                                 "Sistem sekolah diretas! Isi formulir registrasi agen untuk memulai misi."
                             </p>
                         </div>
 
                         {/* Card Formulir Registrasi Siswa */}
-                        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-5 mb-6">
-                            <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
-                                <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-                                    <i className="fa-solid fa-clipboard-check"></i> Form Registrasi Agen & Pre-Test Karakter
+                        <div className="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 sm:p-5 mb-4 sm:mb-6">
+                            <div className="flex items-center justify-between pb-2.5 sm:pb-3 mb-3 sm:mb-4 border-b border-slate-800 gap-2">
+                                <div className="flex items-center gap-1.5 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider truncate">
+                                    <i className="fa-solid fa-clipboard-check shrink-0"></i>
+                                    <span className="truncate">Form Registrasi Agen & Pre-Test Karakter</span>
                                 </div>
-                                <span className="text-[11px] bg-cyan-950 text-cyan-400 border border-cyan-800/60 px-2 py-0.5 rounded">
+                                <span className="text-[10px] sm:text-[11px] bg-cyan-950 text-cyan-400 border border-cyan-800/60 px-2 py-0.5 rounded shrink-0">
                                     Wajib
                                 </span>
                             </div>
 
-                            <div className="space-y-4">
+                            <div className="space-y-3.5 sm:space-y-4">
                                 <div>
                                     <label className="block text-xs font-semibold text-slate-300 mb-1">
                                         Nama Lengkap Siswa / Alias Agen
@@ -767,13 +767,12 @@ export default function App() {
                                                 nameCheckTimer.current = setTimeout(() => checkNameUniqueness(e.target.value), 600);
                                             }}
                                             placeholder="Contoh: Arya Guardian"
-                                            className={`w-full bg-slate-900 border rounded-lg pl-8 pr-3 py-2 text-sm text-cyan-200 focus:outline-none focus:ring-1 transition ${
-                                                nameCheckStatus === 'taken'
+                                            className={`w-full bg-slate-900 border rounded-lg pl-8 pr-3 py-2 text-xs sm:text-sm text-cyan-200 focus:outline-none focus:ring-1 transition ${nameCheckStatus === 'taken'
                                                     ? 'border-red-500 focus:border-red-400 focus:ring-red-400'
                                                     : nameCheckStatus === 'available'
-                                                    ? 'border-emerald-500 focus:border-emerald-400 focus:ring-emerald-400'
-                                                    : 'border-slate-700 focus:border-cyan-400 focus:ring-cyan-400'
-                                            }`}
+                                                        ? 'border-emerald-500 focus:border-emerald-400 focus:ring-emerald-400'
+                                                        : 'border-slate-700 focus:border-cyan-400 focus:ring-cyan-400'
+                                                }`}
                                         />
                                     </div>
                                     {/* Indikator Keunikan Nama */}
@@ -808,13 +807,13 @@ export default function App() {
                                             value={agentSchool}
                                             onChange={(e) => setAgentSchool(e.target.value)}
                                             placeholder="Contoh: Kelas 11 SMA Negeri 1"
-                                            className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-8 pr-3 py-2 text-sm text-cyan-200 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
+                                            className="w-full bg-slate-900 border border-slate-700 rounded-lg pl-8 pr-3 py-2 text-xs sm:text-sm text-cyan-200 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition"
                                         />
                                     </div>
                                 </div>
 
                                 {/* Petunjuk Simulasi Edukatif & Poin */}
-                                <div className="mt-3 p-3.5 bg-cyan-950/30 border border-dashed border-cyan-700/40 rounded-lg">
+                                <div className="mt-3 p-3 sm:p-3.5 bg-cyan-950/30 border border-dashed border-cyan-700/40 rounded-lg">
                                     <div className="flex items-center gap-2 text-cyan-300 text-xs font-semibold mb-1.5">
                                         <i className="fa-solid fa-stopwatch text-amber-400"></i>
                                         <span>Aturan Sistem Poin & Timer 45 Detik:</span>
@@ -830,18 +829,17 @@ export default function App() {
                         </div>
 
                         {/* Tombol Interaktif Mulai */}
-                        <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3">
                             <button
                                 onClick={() => {
                                     randomizeCases();
                                     setCurrentPage(PAGES.PAGE_2_HUB);
                                 }}
                                 disabled={!agentName.trim() || nameCheckStatus === 'taken' || nameCheckStatus === 'checking'}
-                                className={`flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transform active:scale-[0.99] transition duration-200 ${
-                                    (!agentName.trim() || nameCheckStatus === 'taken' || nameCheckStatus === 'checking')
+                                className={`flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transform active:scale-[0.99] transition duration-200 text-xs sm:text-sm ${(!agentName.trim() || nameCheckStatus === 'taken' || nameCheckStatus === 'checking')
                                         ? 'opacity-40 cursor-not-allowed'
                                         : ''
-                                }`}
+                                    }`}
                             >
                                 <span>MULAI MISI SEKARANG</span>
                                 <i className="fa-solid fa-arrow-right"></i>
@@ -849,7 +847,7 @@ export default function App() {
 
                             <button
                                 onClick={openLeaderboard}
-                                className="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 font-bold py-3.5 px-5 rounded-xl transition flex items-center justify-center gap-2"
+                                className="bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 font-bold py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm"
                             >
                                 <i className="fa-solid fa-trophy"></i>
                                 <span>Leaderboard</span>
@@ -906,31 +904,28 @@ export default function App() {
                         )}
 
                         {/* Grid 4 Peta Zona */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             {/* ZONA 1 */}
                             <div
                                 onClick={() => handleZoneClick('zone1', PAGES.PAGE_3_ZONA_1, 'Zona 1: Phishing Zone')}
-                                className={`group p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${
-                                    completedZones.zone1
+                                className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone1
                                         ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
                                         : unlockedZones.zone1
-                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                        : 'bg-slate-950/80 border-slate-800 opacity-60'
-                                }`}
+                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                            : 'bg-slate-950/80 border-slate-800 opacity-60'
+                                    }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
-                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${
-                                        completedZones.zone1
+                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone1
                                             ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                                             : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                    }`}>
+                                        }`}>
                                         <i className={completedZones.zone1 ? "fa-solid fa-circle-check" : "fa-solid fa-envelope-open-text"}></i>
                                     </div>
-                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${
-                                        completedZones.zone1
+                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone1
                                             ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
                                             : 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                    }`}>
+                                        }`}>
                                         {completedZones.zone1 ? 'STATUS: COMPLETED ✓' : 'STATUS: UNLOCKED'}
                                     </span>
                                 </div>
@@ -964,31 +959,28 @@ export default function App() {
                             {/* ZONA 2 */}
                             <div
                                 onClick={() => handleZoneClick('zone2', PAGES.PAGE_6_ZONA_2, 'Zona 2: Password Vault')}
-                                className={`group p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${
-                                    completedZones.zone2
+                                className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone2
                                         ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
                                         : unlockedZones.zone2
-                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                        : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
-                                }`}
+                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                            : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
+                                    }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
-                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${
-                                        completedZones.zone2
+                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone2
                                             ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                                             : unlockedZones.zone2
-                                            ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                            : 'bg-slate-800/50 border border-slate-700 text-slate-500'
-                                    }`}>
+                                                ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                                : 'bg-slate-800/50 border border-slate-700 text-slate-500'
+                                        }`}>
                                         <i className={completedZones.zone2 ? "fa-solid fa-circle-check" : unlockedZones.zone2 ? "fa-solid fa-lock-open" : "fa-solid fa-lock"}></i>
                                     </div>
-                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${
-                                        completedZones.zone2
+                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone2
                                             ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
                                             : unlockedZones.zone2
-                                            ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                            : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
-                                    }`}>
+                                                ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                                : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
+                                        }`}>
                                         {completedZones.zone2 ? 'STATUS: COMPLETED ✓' : unlockedZones.zone2 ? 'STATUS: UNLOCKED' : 'STATUS: LOCKED 🔒'}
                                     </span>
                                 </div>
@@ -1022,31 +1014,28 @@ export default function App() {
                             {/* ZONA 3 */}
                             <div
                                 onClick={() => handleZoneClick('zone3', PAGES.PAGE_8_ZONA_3, 'Zona 3: Social Privacy')}
-                                className={`group p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${
-                                    completedZones.zone3
+                                className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone3
                                         ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
                                         : unlockedZones.zone3
-                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                        : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
-                                }`}
+                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                            : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
+                                    }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
-                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${
-                                        completedZones.zone3
+                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone3
                                             ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                                             : unlockedZones.zone3
-                                            ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                            : 'bg-slate-800/50 border border-slate-700 text-slate-500'
-                                    }`}>
+                                                ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                                : 'bg-slate-800/50 border border-slate-700 text-slate-500'
+                                        }`}>
                                         <i className={completedZones.zone3 ? "fa-solid fa-circle-check" : unlockedZones.zone3 ? "fa-solid fa-id-card" : "fa-solid fa-lock"}></i>
                                     </div>
-                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${
-                                        completedZones.zone3
+                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone3
                                             ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
                                             : unlockedZones.zone3
-                                            ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                            : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
-                                    }`}>
+                                                ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                                : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
+                                        }`}>
                                         {completedZones.zone3 ? 'STATUS: COMPLETED ✓' : unlockedZones.zone3 ? 'STATUS: UNLOCKED' : 'STATUS: LOCKED 🔒'}
                                     </span>
                                 </div>
@@ -1080,31 +1069,28 @@ export default function App() {
                             {/* ZONA 4 */}
                             <div
                                 onClick={() => handleZoneClick('zone4', PAGES.PAGE_10_ZONA_4, 'Zona 4: Hoax Lab')}
-                                className={`group p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${
-                                    completedZones.zone4
+                                className={`group p-4 sm:p-5 rounded-xl border transition-all cursor-pointer relative overflow-hidden ${completedZones.zone4
                                         ? 'bg-emerald-950/30 border-emerald-500/60 shadow-[0_0_20px_rgba(16,185,129,0.15)]'
                                         : unlockedZones.zone4
-                                        ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
-                                        : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
-                                }`}
+                                            ? 'bg-slate-900/90 border-cyan-500/50 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(6,182,212,0.25)]'
+                                            : 'bg-slate-950/80 border-slate-800 hover:border-slate-700'
+                                    }`}
                             >
                                 <div className="flex items-start justify-between mb-3">
-                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${
-                                        completedZones.zone4
+                                    <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-xl transition-transform ${completedZones.zone4
                                             ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                                             : unlockedZones.zone4
-                                            ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
-                                            : 'bg-slate-800/50 border border-slate-700 text-slate-500'
-                                    }`}>
+                                                ? 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:scale-105'
+                                                : 'bg-slate-800/50 border border-slate-700 text-slate-500'
+                                        }`}>
                                         <i className={completedZones.zone4 ? "fa-solid fa-circle-check" : unlockedZones.zone4 ? "fa-solid fa-flask-vial" : "fa-solid fa-lock"}></i>
                                     </div>
-                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${
-                                        completedZones.zone4
+                                    <span className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${completedZones.zone4
                                             ? 'bg-emerald-500/20 border border-emerald-400 text-emerald-300'
                                             : unlockedZones.zone4
-                                            ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
-                                            : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
-                                    }`}>
+                                                ? 'bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+                                                : 'bg-amber-500/10 border border-amber-500/40 text-amber-400'
+                                        }`}>
                                         {completedZones.zone4 ? 'STATUS: COMPLETED ✓' : unlockedZones.zone4 ? 'STATUS: UNLOCKED' : 'STATUS: LOCKED 🔒'}
                                     </span>
                                 </div>
@@ -1132,7 +1118,7 @@ export default function App() {
                     HALAMAN 3: ZONA 1 - SIMULASI PHISHING
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_3_ZONA_1 && (
-                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
                         {/* Header Zona & Timer 45 Detik */}
                         <div className="border-b border-slate-800 pb-3 mb-4">
                             <div className="flex items-center justify-between mb-2">
@@ -1211,27 +1197,24 @@ export default function App() {
                                             handleWrongChoice(option.fallout, PAGES.PAGE_3_ZONA_1);
                                         }
                                     }}
-                                    className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-center justify-between ${
-                                        option.isCorrect
+                                    className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-center justify-between ${option.isCorrect
                                             ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
                                             : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
-                                    }`}
+                                        }`}
                                 >
                                     <div className="flex items-center gap-3">
-                                        <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center ${
-                                            idx === 0
+                                        <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center ${idx === 0
                                                 ? 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
                                                 : 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
-                                        }`}>
+                                            }`}>
                                             {idx === 0 ? 'A' : 'B'}
                                         </span>
                                         <span className="text-xs sm:text-sm font-medium">
                                             {option.label}
                                         </span>
                                     </div>
-                                    <i className={`fa-solid fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity ${
-                                        option.isCorrect ? 'text-emerald-400' : 'text-red-400'
-                                    }`}></i>
+                                    <i className={`fa-solid fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-opacity ${option.isCorrect ? 'text-emerald-400' : 'text-red-400'
+                                        }`}></i>
                                 </button>
                             ))}
                         </div>
@@ -1242,7 +1225,7 @@ export default function App() {
                     HALAMAN 4: GAME OVER & FALLOUT SIMULATOR REALISTIS
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_4_GAMEOVER && (
-                    <div className="w-full max-w-lg bg-slate-900/95 border border-red-500/50 rounded-2xl p-6 sm:p-8 shadow-[0_0_50px_rgba(239,68,68,0.25)] animate-shake">
+                    <div className="w-full max-w-lg bg-slate-900/95 border border-red-500/50 rounded-2xl p-4 sm:p-7 shadow-[0_0_50px_rgba(239,68,68,0.25)] animate-shake">
                         <div className="flex items-center justify-center gap-2 mb-4">
                             <span className="w-14 h-14 rounded-full bg-red-500/10 border-2 border-red-500/50 text-red-500 flex items-center justify-center text-2xl">
                                 <i className="fa-solid fa-triangle-exclamation"></i>
@@ -1328,7 +1311,7 @@ export default function App() {
                     HALAMAN 5: ZONA 1 SUKSES & REFLEKSI INTEGRITAS
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_5_ZONA_1_SUCCESS && (
-                    <div className="w-full max-w-md bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-md bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-4 sm:p-7 text-center shadow-2xl backdrop-blur-md animate-fadeIn">
                         <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/50 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-3xl">
                             <i className="fa-solid fa-check"></i>
                         </div>
@@ -1388,7 +1371,7 @@ export default function App() {
                     HALAMAN 6: ZONA 2 - PASSWORD VAULT
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_6_ZONA_2 && (
-                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
                         {!unlockedZones.zone2 ? (
                             <PasscodePromptView
                                 zoneTitle="Zona 2: Password Vault"
@@ -1455,18 +1438,16 @@ export default function App() {
                                                     handleWrongChoice(option.fallout, PAGES.PAGE_6_ZONA_2);
                                                 }
                                             }}
-                                            className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-center justify-between ${
-                                                option.isCorrect
+                                            className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-center justify-between ${option.isCorrect
                                                     ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
                                                     : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
-                                            }`}
+                                                }`}
                                         >
                                             <div className="flex items-center gap-3">
-                                                <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center font-mono ${
-                                                    idx === 0
+                                                <span className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center font-mono ${idx === 0
                                                         ? 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
                                                         : 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
-                                                }`}>
+                                                    }`}>
                                                     {idx === 0 ? 'A' : 'B'}
                                                 </span>
                                                 <span className="text-xs sm:text-sm font-mono font-medium">
@@ -1486,7 +1467,7 @@ export default function App() {
                     HALAMAN 7: ZONA 2 SUKSES & REFLEKSI TANGGUNG JAWAB
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_7_ZONA_2_SUCCESS && (
-                    <div className="w-full max-w-md bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-md bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-4 sm:p-7 text-center shadow-2xl backdrop-blur-md animate-fadeIn">
                         <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/50 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-3xl">
                             <i className="fa-solid fa-lock"></i>
                         </div>
@@ -1545,7 +1526,7 @@ export default function App() {
                     HALAMAN 8: ZONA 3 - SOCIAL PRIVACY
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_8_ZONA_3 && (
-                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
                         {!unlockedZones.zone3 ? (
                             <PasscodePromptView
                                 zoneTitle="Zona 3: Social Privacy"
@@ -1630,17 +1611,15 @@ export default function App() {
                                                     handleWrongChoice(option.fallout, PAGES.PAGE_8_ZONA_3);
                                                 }
                                             }}
-                                            className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-start gap-3 ${
-                                                option.isCorrect
+                                            className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-start gap-3 ${option.isCorrect
                                                     ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
                                                     : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
-                                            }`}
+                                                }`}
                                         >
-                                            <span className={`w-7 h-7 shrink-0 rounded-lg text-xs font-bold flex items-center justify-center ${
-                                                idx === 0
+                                            <span className={`w-7 h-7 shrink-0 rounded-lg text-xs font-bold flex items-center justify-center ${idx === 0
                                                     ? 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
                                                     : 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
-                                            }`}>
+                                                }`}>
                                                 {idx === 0 ? 'A' : 'B'}
                                             </span>
                                             <span className="text-xs sm:text-sm font-medium leading-relaxed">
@@ -1658,7 +1637,7 @@ export default function App() {
                     HALAMAN 9: ZONA 3 SUKSES & REFLEKSI EMPATI
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_9_ZONA_3_SUCCESS && (
-                    <div className="w-full max-w-md bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-md bg-slate-900/90 border border-emerald-500/40 rounded-2xl p-4 sm:p-7 text-center shadow-2xl backdrop-blur-md animate-fadeIn">
                         <div className="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-500/50 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-3xl">
                             <i className="fa-solid fa-user-shield"></i>
                         </div>
@@ -1717,7 +1696,7 @@ export default function App() {
                     HALAMAN 10: ZONA 4 - HOAX LAB
                 ======================================================== */}
                 {currentPage === PAGES.PAGE_10_ZONA_4 && (
-                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
+                    <div className="w-full max-w-xl bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl backdrop-blur-md animate-fadeIn">
                         {!unlockedZones.zone4 ? (
                             <PasscodePromptView
                                 zoneTitle="Zona 4: Hoax Lab"
@@ -1793,17 +1772,15 @@ export default function App() {
                                                     handleWrongChoice(option.fallout, PAGES.PAGE_10_ZONA_4);
                                                 }
                                             }}
-                                            className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-start gap-3 ${
-                                                option.isCorrect
+                                            className={`w-full text-left p-3.5 rounded-xl border text-slate-200 transition group flex items-start gap-3 ${option.isCorrect
                                                     ? 'bg-slate-800/70 hover:bg-emerald-950/40 border-slate-700 hover:border-emerald-500/50'
                                                     : 'bg-slate-800/70 hover:bg-red-950/40 border-slate-700 hover:border-red-500/50'
-                                            }`}
+                                                }`}
                                         >
-                                            <span className={`w-7 h-7 shrink-0 rounded-lg text-xs font-bold flex items-center justify-center ${
-                                                idx === 0
+                                            <span className={`w-7 h-7 shrink-0 rounded-lg text-xs font-bold flex items-center justify-center ${idx === 0
                                                     ? 'bg-slate-700 group-hover:bg-emerald-500/20 group-hover:text-emerald-400'
                                                     : 'bg-slate-700 group-hover:bg-red-500/20 group-hover:text-red-400'
-                                            }`}>
+                                                }`}>
                                                 {idx === 0 ? 'A' : 'B'}
                                             </span>
                                             <span className="text-xs sm:text-sm font-medium leading-relaxed">
@@ -1857,21 +1834,21 @@ export default function App() {
                         </div>
 
                         {/* PANEL PENGHARGAAN GELAR CYBER GUARDIAN */}
-                        <div className="bg-gradient-to-b from-slate-950 to-slate-900 border-2 border-cyan-500/60 rounded-2xl p-6 sm:p-8 mb-6 shadow-2xl relative overflow-hidden">
+                        <div className="bg-gradient-to-b from-slate-950 to-slate-900 border-2 border-cyan-500/60 rounded-2xl p-3.5 sm:p-8 mb-6 shadow-2xl relative overflow-hidden">
                             <div className="absolute right-4 bottom-4 opacity-10 pointer-events-none text-9xl">
                                 <i className="fa-solid fa-shield-halved"></i>
                             </div>
 
-                            <div className="border border-cyan-500/30 rounded-xl p-5 text-center relative z-10 bg-slate-950/60 backdrop-blur-sm">
-                                <p className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 font-semibold mb-1">
+                            <div className="border border-cyan-500/30 rounded-xl p-3.5 sm:p-5 text-center relative z-10 bg-slate-950/60 backdrop-blur-sm">
+                                <p className="text-[9px] sm:text-[11px] font-mono uppercase tracking-widest text-cyan-400 font-semibold mb-1">
                                     SERTIFIKAT KOMPETENSI KEAMANAN SIBER & PENDIDIKAN BERKARAKTER
                                 </p>
-                                <h3 className="text-xl sm:text-2xl font-serif font-black text-amber-300 tracking-wider uppercase mb-1">
+                                <h3 className="text-lg sm:text-2xl font-serif font-black text-amber-300 tracking-wider uppercase mb-1">
                                     MASTER CYBER GUARDIAN
                                 </h3>
                                 <p className="text-xs text-slate-400 mb-4">Diberikan secara terhormat kepada:</p>
 
-                                <div className="text-xl sm:text-3xl font-extrabold text-white tracking-wide underline decoration-cyan-500 decoration-2 underline-offset-8 mb-2">
+                                <div className="text-xl sm:text-3xl font-extrabold text-white tracking-wide underline decoration-cyan-500 decoration-2 underline-offset-8 mb-2 break-words">
                                     {agentName || 'Agen Pelajar Teladan'}
                                 </div>
                                 <p className="text-xs text-cyan-300 font-medium mb-6">
@@ -1884,23 +1861,23 @@ export default function App() {
 
                                 {/* 4 Lencana Karakter */}
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-slate-800">
-                                    <div className="p-2.5 rounded-lg bg-slate-900/90 border border-emerald-500/30 text-center">
-                                        <i className="fa-solid fa-shield-halved text-emerald-400 text-lg mb-1"></i>
+                                    <div className="p-2 sm:p-2.5 rounded-lg bg-slate-900/90 border border-emerald-500/30 text-center">
+                                        <i className="fa-solid fa-shield-halved text-emerald-400 text-base sm:text-lg mb-1"></i>
                                         <p className="text-[10px] font-bold text-white">Integritas</p>
                                         <p className="text-[9px] text-slate-400">Anti-Phishing</p>
                                     </div>
-                                    <div className="p-2.5 rounded-lg bg-slate-900/90 border border-cyan-500/30 text-center">
-                                        <i className="fa-solid fa-key text-cyan-400 text-lg mb-1"></i>
+                                    <div className="p-2 sm:p-2.5 rounded-lg bg-slate-900/90 border border-cyan-500/30 text-center">
+                                        <i className="fa-solid fa-key text-cyan-400 text-base sm:text-lg mb-1"></i>
                                         <p className="text-[10px] font-bold text-white">Tanggung Jawab</p>
                                         <p className="text-[9px] text-slate-400">Password & 2FA</p>
                                     </div>
-                                    <div className="p-2.5 rounded-lg bg-slate-900/90 border border-purple-500/30 text-center">
-                                        <i className="fa-solid fa-user-shield text-purple-400 text-lg mb-1"></i>
+                                    <div className="p-2 sm:p-2.5 rounded-lg bg-slate-900/90 border border-purple-500/30 text-center">
+                                        <i className="fa-solid fa-user-shield text-purple-400 text-base sm:text-lg mb-1"></i>
                                         <p className="text-[10px] font-bold text-white">Empati Privasi</p>
                                         <p className="text-[9px] text-slate-400">Lindungi Data</p>
                                     </div>
-                                    <div className="p-2.5 rounded-lg bg-slate-900/90 border border-amber-500/30 text-center">
-                                        <i className="fa-solid fa-brain text-amber-400 text-lg mb-1"></i>
+                                    <div className="p-2 sm:p-2.5 rounded-lg bg-slate-900/90 border border-amber-500/30 text-center">
+                                        <i className="fa-solid fa-brain text-amber-400 text-base sm:text-lg mb-1"></i>
                                         <p className="text-[10px] font-bold text-white">Kebijaksanaan</p>
                                         <p className="text-[9px] text-slate-400">Saring Hoaks</p>
                                     </div>
@@ -1942,8 +1919,8 @@ export default function App() {
                 MODAL POP-UP: ZONA SUDAH SELESAI (KETENTUAN 3)
             ======================================================== */}
             {activeModal === 'zone_completed_notice' && completedNoticeData && (
-                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-                    <div className="bg-slate-900 border-2 border-emerald-500/50 rounded-2xl p-6 sm:p-7 max-w-md w-full shadow-[0_0_40px_rgba(16,185,129,0.3)] text-center">
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
+                    <div className="bg-slate-900 border-2 border-emerald-500/50 rounded-2xl p-4 sm:p-6 max-w-md w-full shadow-[0_0_40px_rgba(16,185,129,0.3)] text-center">
                         <div className="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
                             <i className="fa-solid fa-circle-check"></i>
                         </div>
@@ -2003,8 +1980,8 @@ export default function App() {
                 MODAL LEADERBOARD (PAPAN PERINGKAT)
             ======================================================== */}
             {showLeaderboard && (
-                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-                    <div className="bg-slate-900 border border-amber-500/50 rounded-2xl p-6 sm:p-7 max-w-xl w-full shadow-2xl relative max-h-[85vh] flex flex-col">
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
+                    <div className="bg-slate-900 border border-amber-500/50 rounded-2xl p-4 sm:p-6 max-w-xl w-full shadow-2xl relative max-h-[90vh] flex flex-col">
                         <button
                             onClick={() => setShowLeaderboard(false)}
                             className="absolute right-4 top-4 text-slate-400 hover:text-white transition p-1"
@@ -2039,27 +2016,25 @@ export default function App() {
                                 leaderboardList.map((entry, idx) => (
                                     <div
                                         key={idx}
-                                        className={`p-3 rounded-xl border flex items-center justify-between transition ${
-                                            idx === 0
+                                        className={`p-3 rounded-xl border flex items-center justify-between transition ${idx === 0
                                                 ? 'bg-amber-950/30 border-amber-500/50 shadow-[0_0_15px_rgba(245,158,11,0.15)]'
                                                 : idx === 1
-                                                ? 'bg-slate-800/80 border-slate-400/40'
-                                                : idx === 2
-                                                ? 'bg-amber-950/20 border-amber-700/40'
-                                                : 'bg-slate-950/60 border-slate-800'
-                                        }`}
+                                                    ? 'bg-slate-800/80 border-slate-400/40'
+                                                    : idx === 2
+                                                        ? 'bg-amber-950/20 border-amber-700/40'
+                                                        : 'bg-slate-950/60 border-slate-800'
+                                            }`}
                                     >
                                         <div className="flex items-center gap-3">
                                             {/* Badge Rank */}
-                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs ${
-                                                idx === 0
+                                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-black text-xs ${idx === 0
                                                     ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30'
                                                     : idx === 1
-                                                    ? 'bg-slate-300 text-slate-950'
-                                                    : idx === 2
-                                                    ? 'bg-amber-700 text-amber-100'
-                                                    : 'bg-slate-800 text-slate-400 font-mono'
-                                            }`}>
+                                                        ? 'bg-slate-300 text-slate-950'
+                                                        : idx === 2
+                                                            ? 'bg-amber-700 text-amber-100'
+                                                            : 'bg-slate-800 text-slate-400 font-mono'
+                                                }`}>
                                                 {idx === 0 ? <i className="fa-solid fa-crown text-slate-950"></i> : `#${idx + 1}`}
                                             </div>
 
@@ -2105,8 +2080,8 @@ export default function App() {
                 MODAL EDUKASI RESMI
             ======================================================== */}
             {activeModal === 'info_edu' && (
-                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-                    <div className="bg-slate-900 border border-cyan-500/40 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
+                    <div className="bg-slate-900 border border-cyan-500/40 rounded-2xl p-4 sm:p-6 max-w-md w-full shadow-2xl">
                         <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
                             <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm">
                                 <i className="fa-solid fa-circle-info text-base"></i>
@@ -2133,7 +2108,7 @@ export default function App() {
                             onClick={() => setActiveModal(null)}
                             className="w-full bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-bold py-2.5 rounded-xl transition text-sm"
                         >
-                            Saya Paham
+                            OK
                         </button>
                     </div>
                 </div>
@@ -2143,8 +2118,8 @@ export default function App() {
                 MODAL KONSULTASI GURU TIK (HINT LIFELINE)
             ======================================================== */}
             {activeModal === 'hint_consultant' && (
-                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-                    <div className="bg-slate-900 border border-indigo-500/40 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
+                    <div className="bg-slate-900 border border-indigo-500/40 rounded-2xl p-4 sm:p-6 max-w-md w-full shadow-2xl">
                         <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
                             <div className="flex items-center gap-2 text-indigo-400 font-bold text-sm">
                                 <i className="fa-solid fa-chalkboard-user text-base"></i>
@@ -2175,7 +2150,7 @@ export default function App() {
                             onClick={() => setActiveModal(null)}
                             className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl transition text-sm"
                         >
-                            Terima Kasih, Guru
+                            OK
                         </button>
                     </div>
                 </div>
@@ -2185,8 +2160,8 @@ export default function App() {
                 MODAL PROMPT PASSCODE PETA MISI
             ======================================================== */}
             {activeModal === 'passcode_prompt' && passcodeTargetZone && (
-                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn">
-                    <div className="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+                <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 animate-fadeIn">
+                    <div className="bg-slate-900 border border-amber-500/40 rounded-2xl p-4 sm:p-6 max-w-md w-full shadow-2xl">
                         <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
                             <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
                                 <i className="fa-solid fa-key text-base"></i>
@@ -2267,13 +2242,11 @@ function ZoneTimerBar({ timeLeft, timeLimit }) {
         <div className="mt-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
             <div className="flex items-center justify-between text-xs mb-1.5">
                 <div className="flex items-center gap-1.5 font-mono">
-                    <i className={`fa-solid fa-clock text-xs ${
-                        timeLeft <= 10 ? 'text-red-400 animate-spin' : timeLeft <= 20 ? 'text-amber-400' : 'text-cyan-400'
-                    }`}></i>
+                    <i className={`fa-solid fa-clock text-xs ${timeLeft <= 10 ? 'text-red-400 animate-spin' : timeLeft <= 20 ? 'text-amber-400' : 'text-cyan-400'
+                        }`}></i>
                     <span className="text-slate-400 text-[11px]">Waktu Analisis:</span>
-                    <span className={`font-black text-sm ${
-                        timeLeft <= 10 ? 'text-red-400 animate-pulse' : timeLeft <= 20 ? 'text-amber-400' : 'text-cyan-300'
-                    }`}>
+                    <span className={`font-black text-sm ${timeLeft <= 10 ? 'text-red-400 animate-pulse' : timeLeft <= 20 ? 'text-amber-400' : 'text-cyan-300'
+                        }`}>
                         {String(Math.floor(timeLeft / 60)).padStart(2, '0')}:{String(timeLeft % 60).padStart(2, '0')}
                     </span>
                 </div>
@@ -2289,13 +2262,12 @@ function ZoneTimerBar({ timeLeft, timeLimit }) {
             {/* Progress bar */}
             <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
                 <div
-                    className={`h-full transition-all duration-1000 rounded-full ${
-                        timeLeft <= 10
+                    className={`h-full transition-all duration-1000 rounded-full ${timeLeft <= 10
                             ? 'bg-gradient-to-r from-red-500 to-rose-600'
                             : timeLeft <= 20
-                            ? 'bg-gradient-to-r from-amber-400 to-yellow-500'
-                            : 'bg-gradient-to-r from-cyan-400 to-emerald-400'
-                    }`}
+                                ? 'bg-gradient-to-r from-amber-400 to-yellow-500'
+                                : 'bg-gradient-to-r from-cyan-400 to-emerald-400'
+                        }`}
                     style={{ width: `${percentage}%` }}
                 ></div>
             </div>
