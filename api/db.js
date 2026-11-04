@@ -1,5 +1,23 @@
 import fs from 'fs';
 import path from 'path';
+import { Redis } from '@upstash/redis';
+
+// Cek konfigurasi Upstash Redis dari Environment Variables Vercel
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+
+let redisClient = null;
+if (redisUrl && redisToken) {
+    try {
+        redisClient = new Redis({
+            url: redisUrl,
+            token: redisToken
+        });
+        console.log('[DB] Upstash Redis connected successfully.');
+    } catch (e) {
+        console.warn('[DB] Failed to initialize Upstash Redis, fallback to local DB:', e.message);
+    }
+}
 
 const isVercel = Boolean(process.env.VERCEL);
 const dbPath = isVercel
@@ -67,7 +85,23 @@ function ensureDbFile() {
     }
 }
 
-export function readDb() {
+export async function readDb() {
+    // 1. Prioritaskan Upstash Redis jika tersedia
+    if (redisClient) {
+        try {
+            const data = await redisClient.get('cyber_guardian_db');
+            if (data) {
+                return typeof data === 'string' ? JSON.parse(data) : data;
+            }
+            // Jika belum ada record di Redis, simpan initialData
+            await redisClient.set('cyber_guardian_db', initialData);
+            return JSON.parse(JSON.stringify(initialData));
+        } catch (err) {
+            console.error('[DB] Redis read error, falling back to local storage:', err.message);
+        }
+    }
+
+    // 2. Fallback ke file JSON lokal (untuk offline/testing)
     ensureDbFile();
     try {
         if (fs.existsSync(dbPath)) {
@@ -83,7 +117,18 @@ export function readDb() {
     return memoryDb;
 }
 
-export function writeDb(data) {
+export async function writeDb(data) {
+    // 1. Simpan ke Upstash Redis jika tersedia
+    if (redisClient) {
+        try {
+            await redisClient.set('cyber_guardian_db', data);
+            return;
+        } catch (err) {
+            console.error('[DB] Redis write error, falling back to local storage:', err.message);
+        }
+    }
+
+    // 2. Fallback simpan ke file JSON lokal
     ensureDbFile();
     try {
         fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf-8');

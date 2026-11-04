@@ -21,13 +21,13 @@ app.get('/api/health', (req, res) => {
 // -------------------------------------------------------------
 // CHECK USERNAME / STUDENT NAME UNIQUENESS
 // -------------------------------------------------------------
-app.get('/api/check-name', (req, res) => {
+app.get('/api/check-name', async (req, res) => {
     try {
         const name = (req.query.name || '').trim().toLowerCase();
         if (!name) {
             return res.json({ available: false, message: 'Nama tidak boleh kosong.' });
         }
-        const db = readDb();
+        const db = await readDb();
         const exists = (db.leaderboard || []).some(
             entry => (entry.username || '').trim().toLowerCase() === name
         );
@@ -47,9 +47,9 @@ app.get('/api/check-name', (req, res) => {
 // -------------------------------------------------------------
 // LEADERBOARD: GET TOP PLAYERS
 // -------------------------------------------------------------
-app.get('/api/leaderboard', (req, res) => {
+app.get('/api/leaderboard', async (req, res) => {
     try {
-        const db = readDb();
+        const db = await readDb();
         const list = (db.leaderboard || []).slice();
 
         // Sort: totalScore descending, then timeTakenSeconds ascending
@@ -76,7 +76,7 @@ app.get('/api/leaderboard', (req, res) => {
 // -------------------------------------------------------------
 // LEADERBOARD: SUBMIT SCORE (TANPA PASSWORD/LOGIN)
 // -------------------------------------------------------------
-app.post('/api/leaderboard/submit', (req, res) => {
+app.post('/api/leaderboard/submit', async (req, res) => {
     try {
         const { username, school, totalScore, timeTakenSeconds, badges } = req.body;
 
@@ -86,7 +86,7 @@ app.post('/api/leaderboard/submit', (req, res) => {
         const scoreNum = Math.max(0, parseInt(totalScore, 10) || 0);
         const timeNum = Math.max(1, parseInt(timeTakenSeconds, 10) || 0);
 
-        const db = readDb();
+        const db = await readDb();
         if (!db.leaderboard) db.leaderboard = [];
 
         // Cek apakah username sudah ada di leaderboard
@@ -120,7 +120,7 @@ app.post('/api/leaderboard/submit', (req, res) => {
             db.leaderboard.push(newEntry);
         }
 
-        writeDb(db);
+        await writeDb(db);
 
         res.status(201).json({
             message: 'Skor berhasil dicatat ke Leaderboard Cyber Guardian!',
@@ -139,7 +139,7 @@ app.post('/api/leaderboard/submit', (req, res) => {
 // -------------------------------------------------------------
 // LEADERBOARD: HAPUS SATU DATA (KHUSUS PENGAJAR/GURU)
 // -------------------------------------------------------------
-app.delete('/api/leaderboard/:id', (req, res) => {
+app.delete('/api/leaderboard/:id', async (req, res) => {
     try {
         const { pin } = req.body || {};
         const queryPin = req.query.pin;
@@ -151,14 +151,14 @@ app.delete('/api/leaderboard/:id', (req, res) => {
         }
 
         const { id } = req.params;
-        const db = readDb();
+        const db = await readDb();
         const initialLength = (db.leaderboard || []).length;
 
         db.leaderboard = (db.leaderboard || []).filter(
             e => e.id !== id && e.username.toLowerCase() !== id.toLowerCase()
         );
 
-        writeDb(db);
+        await writeDb(db);
 
         res.json({
             success: true,
@@ -174,7 +174,7 @@ app.delete('/api/leaderboard/:id', (req, res) => {
 // -------------------------------------------------------------
 // LEADERBOARD: RESET SEMUA DATA (KHUSUS PENGAJAR/GURU)
 // -------------------------------------------------------------
-app.post('/api/leaderboard/reset', (req, res) => {
+app.post('/api/leaderboard/reset', async (req, res) => {
     try {
         const { pin } = req.body || {};
         const ADMIN_PIN = process.env.ADMIN_PIN || 'guru2026';
@@ -183,9 +183,9 @@ app.post('/api/leaderboard/reset', (req, res) => {
             return res.status(403).json({ error: 'PIN Pengajar tidak valid!' });
         }
 
-        const db = readDb();
+        const db = await readDb();
         db.leaderboard = [];
-        writeDb(db);
+        await writeDb(db);
 
         res.json({
             success: true,
